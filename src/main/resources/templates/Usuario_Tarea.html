@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <link rel="stylesheet" href="css/Usuario_Tarea.css">
+  <meta charset="UTF-8">
+  <title>Asignar Tarea a Usuario</title>
+  <style>
+    body { font-family: Arial; padding: 2em; }
+    form { max-width: 400px; margin: auto; }
+    label, select { display: block; margin: 10px 0; width: 100%; }
+    input[type="submit"] { background: #333; color: white; padding: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Asignar Tarea a Usuario</h1>
+  <form action="/usuario-tarea" method="post">
+    <label>Usuario:</label>
+    <select name="usuarioId">
+      <option value="1">Juan Pérez</option>
+    </select>
+    <label>Tarea:</label>
+    <select name="tareaId">
+      <option value="1">Estudiar para examen</option>
+    </select>
+    <input type="submit" value="Asignar">
+  </form>
+</body>
+</html>

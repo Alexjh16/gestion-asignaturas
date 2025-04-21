@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dashboard de Tareas</title>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: Arial; padding: 2rem; background: #f0f0f0; }
+        h1 { color: #333; }
+        .tarea { background: white; padding: 1rem; margin-bottom: 0.5rem; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; }
+        .completada { text-decoration: line-through; color: gray; }
+        form { margin-bottom: 1rem; }
+        input[type="text"] { padding: 0.5rem; width: 300px; }
+        button { padding: 0.5rem 1rem; }
+        .completada {
+            text-decoration: line-through;
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 th:text="'Bienvenido a sus tareas: ' + ${usuario.nombre + ' ' + usuario.apellidos} + '!'"></h1>
+
+    <!-- Formulario para agregar nueva tarea -->
+    <form th:action="@{/tarea/agregar}" method="post">
+        <input type="text" name="descripcion" placeholder="Descripción" required />
+        
+        <label for="Fecha Entrega">Fecha de Entrega</label>
+        <input type="date" name="fechaEntrega" required />
+        <input type="hidden" name="usuarioId" th:value="${usuario.id}" />
+        <input type="hidden" name="usuarioNombre" th:value="${usuario.nombre}" />
+        <input type="hidden" name="usuarioApellidos" th:value="${usuario.apellidos}" />
+        <input type="hidden" name="usuarioUsername" th:value="${usuario.username}" />
+        <input type="hidden" name="usuarioPassword" th:value="${usuario.password}" />
+    
+        <select name="fk_asignatura" required>
+            <option value="" disabled selected>Selecciona una asignatura</option>
+            <option value="1">Ecuaciones Diferenciales</option>
+            <option value="2">Bases de datos II</option>
+            <option value="3">Desarrollo de Software II</option>
+            <option value="4">Visualización de Datos</option>
+            <option value="5">Redes de Computadoras</option>
+            <option value="6">Electiva I</option>
+            <option value="7">Ingles II</option>
+        </select>
+    
+        <button type="submit">Agregar</button>
+    </form>
+
+    <!-- Filtros -->
+    <form method="get" th:action="@{/tarea/filtrar}">
+        <input type="hidden" name="usuarioId" th:value="${usuario.id}" />
+        <input type="hidden" name="usuarioNombre" th:value="${usuario.nombre}" />
+        <input type="hidden" name="usuarioApellidos" th:value="${usuario.apellidos}" />
+        <input type="hidden" name="usuarioUsername" th:value="${usuario.username}" />
+        <input type="hidden" name="usuarioPassword" th:value="${usuario.password}" />
+
+        <label>Filtrar por:
+            <select name="estado">
+                <option value="TODAS">Todas</option>
+                <option value="PENDIENTE">Pendientes</option>
+                <option value="COMPLETADA">Completadas</option>
+            </select>
+        </label>
+        <button type="submit">Aplicar</button>
+    </form>
+
+    <!-- Lista de tareas -->
+    <div th:if="${tareas != null}">
+        <div th:each="tarea : ${tareas}" class="tarea">
+            <span th:text="${tarea.descripcion + ' - Fecha de entrega: ' + tarea.fechaEntrega}" 
+                th:classappend="${tarea.estado} ? 'completada' : ''">
+            </span>
+
+            <div>
+                <form th:action="@{'/tarea/marcar/' + ${tarea.id}}" method="post" style="display: inline;">
+                    <button type="submit" th:text="${tarea.estado} ? 'Desmarcar' : 'Completar'"></button>
+                    <input type="hidden" name="usuarioId" th:value="${usuario.id}" />
+
+                    <input type="hidden" name="usuarioNombre" th:value="${usuario.nombre}" />
+                    <input type="hidden" name="usuarioApellidos" th:value="${usuario.apellidos}" />
+                    <input type="hidden" name="usuarioUsername" th:value="${usuario.username}" />
+                    <input type="hidden" name="usuarioPassword" th:value="${usuario.password}" />
+                </form>
+
+                <form th:action="@{'/tarea/eliminar/' + ${tarea.id}}" method="post" style="display: inline;">
+                    <button type="submit">Eliminar</button>
+
+                    <input type="hidden" name="usuarioId" th:value="${usuario.id}" />
+                    <input type="hidden" name="usuarioNombre" th:value="${usuario.nombre}" />
+                    <input type="hidden" name="usuarioApellidos" th:value="${usuario.apellidos}" />
+                    <input type="hidden" name="usuarioUsername" th:value="${usuario.username}" />
+                    <input type="hidden" name="usuarioPassword" th:value="${usuario.password}" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <p th:if="${tareas == null or tareas.isEmpty()}">No tienes tareas aún.</p>
+
+</body>
+</html>

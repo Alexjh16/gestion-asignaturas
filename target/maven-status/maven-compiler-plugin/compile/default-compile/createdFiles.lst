@@ -1,0 +1,10 @@
+com\tareas\gestion\models\Usuario.class
+com\tareas\gestion\GestionApplication.class
+com\tareas\gestion\controllers\UsuarioController.class
+com\tareas\gestion\models\Usuario_Tarea.class
+com\tareas\gestion\controllers\AsignaturaController.class
+com\tareas\gestion\models\Tarea.class
+com\tareas\gestion\controllers\LoginController.class
+com\tareas\gestion\controllers\TareaController.class
+com\tareas\gestion\controllers\InicioController.class
+com\tareas\gestion\models\Asignatura.class

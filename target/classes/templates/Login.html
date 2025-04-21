@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <link rel="stylesheet" href="css/Login.css">
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <style>
+    body { font-family: Arial; padding: 2em; background: #eee; }
+    form { max-width: 300px; margin: auto; background: white; padding: 20px; border-radius: 10px; }
+    label, input { display: block; margin: 10px 0; width: 100%; }
+    input[type="submit"] { background: #333; color: white; padding: 10px; }
+  </style>
+</head>
+<body>
+  <h1 style="text-align:center;">Iniciar Sesión</h1>
+  <form action="/Login" method="post">
+    <label>Correo:</label>
+    <input type="email" name="username" required>
+    <label>Contraseña:</label>
+    <input type="password" name="password" required>
+    <input type="submit" value="Entrar">
+  </form>
+</body>
+</html>

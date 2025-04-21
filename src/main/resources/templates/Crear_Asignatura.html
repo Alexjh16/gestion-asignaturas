@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <link rel="stylesheet" href="css/Crear_Asignatura.css">
+  <meta charset="UTF-8">
+  <title>Crear Asignatura</title>
+  <style>
+    body { font-family: Arial; padding: 2em; }
+    form { max-width: 400px; margin: auto; }
+    label, input { display: block; margin: 10px 0; width: 100%; }
+    input[type="submit"] { background: #333; color: white; padding: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Crear Nueva Asignatura</h1>
+  <form action="/asignaturas" method="post">
+    <label>Nombre:</label>
+    <input type="text" name="nombre" required>
+    <input type="submit" value="Guardar">
+  </form>
+</body>
+</html>
